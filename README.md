@@ -17,39 +17,44 @@
 3. Убедитесь, что товар успешно добавлен в вашу корзину.
 
 
-**тестовый сценарий python**
+#тестовый сценарий python
 
 
-import unittest
-from selenium import webdriver
-import unittest
+    import unittest
+    from selenium import webdriver
+    import unittest
 
+    class TestAuthorizedEcommerceApp(unittest.TestCase):
 
-class TestAuthorizedEcommerceApp(unittest.TestCase):
-    def test_auth(self):
-        # Авторизация
-        driver = webdriver.Chrome()
-        driver.get("https://example.com/login")
-        username_input = driver.find_element("xpath","_username_element")
-        password_input = driver.find_element("xpath","_password_element")
-        login_button = driver.find_element("xpath","_login_button_element")
+        def test_auth(self):
+        
+            # Авторизация
+            
+            driver = webdriver.Chrome()
+            driver.get("https://example.com/login")
+            username_input = driver.find_element("xpath","_username_element")
+            password_input = driver.find_element("xpath","_password_element")
+            login_button = driver.find_element("xpath","_login_button_element")
+    
+            username_input.send_keys("your_username")
+            password_input.send_keys("your_password")
+            login_button.click()
+    
+            # Выбор товара
+            
+            catalog_link = driver.find_element("xpath","#catalog-link")
+            catalog_link.click()
+            add_to_cart_button = driver.find_element("xpath","#add-to-cart-button")
+            add_to_cart_button.click()
+    
+            # Оформление покупки
+            
+            checkout_button = driver.find_element("xpath","#checkout-button")
+            checkout_button.click()
+    
+            # Проверка завершения покупки
+            
+            assert driver.title == "Товар успешно куплен!"
 
-        username_input.send_keys("your_username")
-        password_input.send_keys("your_password")
-        login_button.click()
-
-        # Выбор товара
-        catalog_link = driver.find_element("xpath","#catalog-link")
-        catalog_link.click()
-        add_to_cart_button = driver.find_element("xpath","#add-to-cart-button")
-        add_to_cart_button.click()
-
-        # Оформление покупки
-        checkout_button = driver.find_element("xpath","#checkout-button")
-        checkout_button.click()
-
-        # Проверка завершения покупки
-        assert driver.title == "Товар успешно куплен!"
-
-if __name__ == "__main__":
-    unittest.main()# E2e_authoris
+    if __name__ == "__main__":
+        unittest.main()# E2e_authoris
